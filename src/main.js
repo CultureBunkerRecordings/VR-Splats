@@ -5,7 +5,7 @@ const viewer = new GaussianSplats3D.Viewer({
     'initialCameraPosition': [1.6, 0, 0],
     'initialCameraLookAt': [0, 0, 0]
 });
-viewer.addSplatScene('public/thereminSplat.splat', {
+viewer.addSplatScene('thereminSplat.splat', {
     'splatAlphaRemovalThreshold': 5,
     'showLoadingUI': true,
     'position': [0, 1, 0],
