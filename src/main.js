@@ -11,7 +11,7 @@ viewer.addSplatScene('/thereminSplat.splat', {
     'position': [0, 1, 0],
     'rotation': [0, 0, 0, 1],
     'scale': [1.5, 1.5, 1.5],
-    'webXRMode': GaussianSplats3D.WebXRMode.AR
+    'webXRMode': GaussianSplats3D.WebXRMode.None
 })
 .then(() => {
     viewer.start();
