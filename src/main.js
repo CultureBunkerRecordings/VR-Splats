@@ -13,7 +13,7 @@ const viewer = new GaussianSplats3D.Viewer({
     webXRMode: GaussianSplats3D.WebXRMode.VR,
 });
 
-await viewer.addSplatScene("/gs_TheseusAndMinotaurLuma.ply");
+await viewer.addSplatScene("/gs_TheseusAndMinotaurLuma.splat");
 
 // Enter VR button
 const btn = document.createElement("button");
