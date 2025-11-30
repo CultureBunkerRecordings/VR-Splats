@@ -10,7 +10,8 @@ viewer.addSplatScene('/gs_TheseusAndMinotaurLuma.ply', {
     'showLoadingUI': true,
     'position': [0, 1, 0],
     'rotation': [0, 0, 0, 1],
-    'scale': [1.5, 1.5, 1.5]
+    'scale': [1.5, 1.5, 1.5],
+    'webXRMode': GaussianSplats3D.WebXRMode.VR
 })
 .then(() => {
     viewer.start();
