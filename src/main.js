@@ -1,18 +1,35 @@
-import * as GaussianSplats3D from '@mkkellogg/gaussian-splats-3d';
+import * as THREE from "three";
+import * as GaussianSplats3D from "@mkkellogg/gaussian-splats-3d";
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.xr.enabled = true;
+document.body.appendChild(renderer.domElement);
+
+const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 50);
 
 const viewer = new GaussianSplats3D.Viewer({
-    'cameraUp': [0, -1, 0],
-    'initialCameraPosition': [1.6, 0, 0],
-    'initialCameraLookAt': [0, 0, 0]
+    renderer,
+    camera,
+    webXRMode: GaussianSplats3D.WebXRMode.VR,
 });
-viewer.addSplatScene('/gs_TheseusAndMinotaurLuma.ply', {
-    'splatAlphaRemovalThreshold': 5,
-    'showLoadingUI': true,
-    'position': [0, 1, 0],
-    'rotation': [0, 0, 0, 1],
-    'scale': [1.5, 1.5, 1.5],
-    'webXRMode': GaussianSplats3D.WebXRMode.AR
-})
-.then(() => {
-    viewer.start();
+
+await viewer.addSplatScene("/gs_TheseusAndMinotaurLuma.ply");
+
+// Enter VR button
+const btn = document.createElement("button");
+btn.innerText = "ENTER VR";
+document.body.appendChild(btn);
+
+btn.onclick = async () => {
+    const session = await navigator.xr.requestSession("immersive-vr", {
+        optionalFeatures: ["local-floor"]
+    });
+
+    renderer.xr.setSession(session);
+    viewer.startWebXRSession(session);
+};
+
+renderer.setAnimationLoop((t) => {
+    viewer.update(t);
+    viewer.render();
 });
